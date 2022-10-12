@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { AvailabilityComponent } from './availability/availability.component';
+import { PresenceRecorderComponent } from './presence-recorder/presence-recorder.component';
 
 
 @NgModule({
   declarations: [
-    AvailabilityComponent
+    AvailabilityComponent,
+    PresenceRecorderComponent
   ],
   imports: [
     CommonModule,
