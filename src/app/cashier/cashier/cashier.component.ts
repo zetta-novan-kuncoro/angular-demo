@@ -28,9 +28,11 @@ export class CashierComponent implements OnInit {
   addItem(item: Item) {
     const duplicatedItemIndex = this.selectedItems.findIndex(({ id }) => id === item.id)
     if (duplicatedItemIndex >= 0) {
-      this.selectedItems[duplicatedItemIndex].amount += 1
+      this.selectedItems = this.selectedItems.map((selectedItem) => {
+        return selectedItem.id === item.id ? { ...selectedItem, amount: selectedItem.amount + 1 } : selectedItem
+      })
     } else {
-      this.selectedItems.push({ ...item, amount: 1 })
+      this.selectedItems = [...this.selectedItems, { ...item, amount: 1 }]
     }
   }
 

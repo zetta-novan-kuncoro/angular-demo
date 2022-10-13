@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-payment',
@@ -8,20 +8,23 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PaymentComponent implements OnInit {
   @Input() items: SelectedItem[] = []
   @Output() itemsChange: EventEmitter<SelectedItem[]> = new EventEmitter<SelectedItem[]>()
+  public total: number = 0;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  removeItem(item: SelectedItem) {
-    const itemIndex = this.items.findIndex(({ id }) => id === item.id)
+  removeItem(itemToBeRemoved: SelectedItem) {
+    const itemIndex = this.items.findIndex(({ id }) => id === itemToBeRemoved.id)
     const itemRef = this.items[itemIndex]
     if (itemRef?.amount) {
-      itemRef.amount -= 1
+      this.items = this.items.map((item) => {
+        return item.id === itemToBeRemoved.id ? { ...item, amount: item.amount - 1 } : item
+      })
     }
     if (itemRef?.amount === 0) {
-      this.items.splice(itemIndex, 1)
+      this.items = [...this.items.slice(0, itemIndex), ...this.items.slice(itemIndex + 1)]
     }
     this.itemsChange.emit(this.items)
   }
