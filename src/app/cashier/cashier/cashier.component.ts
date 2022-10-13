@@ -18,10 +18,20 @@ export class CashierComponent implements OnInit {
     { id: '9', name: 'Japanese Iced Coffee', price: 5000 },
     { id: '10', name: 'Vietnam Drip', price: 5000 },
   ]
+  public selectedItems: SelectedItem[] = []
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addItem(item: Item) {
+    const duplicatedItemIndex = this.selectedItems.findIndex(({ id }) => id === item.id)
+    if (duplicatedItemIndex >= 0) {
+      this.selectedItems[duplicatedItemIndex].amount += 1
+    } else {
+      this.selectedItems.push({ ...item, amount: 1 })
+    }
   }
 
 }

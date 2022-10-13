@@ -3,3 +3,5 @@ type Item = {
   name: string
   price: number
 }
+
+type SelectedItem = Item & { amount: number }
