@@ -5,4 +5,11 @@
     <span>Rp{{ item.price }}</span>
     <button (click)="removeItem(item)">Remove</button>
   </li>
+  <ng-template *ngIf="items.length > 0 then totalPayment; else noItem"></ng-template>
+  <ng-template #totalPayment>
+    <li>Total payment: <b>Rp{{ total }}</b></li>
+  </ng-template>
+  <ng-template #noItem>
+    <li>No items selected</li>
+  </ng-template>
 </ul>

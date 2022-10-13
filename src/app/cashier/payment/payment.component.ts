@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })
-export class PaymentComponent implements OnInit {
+export class PaymentComponent implements OnInit, OnChanges {
   @Input() items: SelectedItem[] = []
   @Output() itemsChange: EventEmitter<SelectedItem[]> = new EventEmitter<SelectedItem[]>()
   public total: number = 0;
@@ -13,6 +13,10 @@ export class PaymentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.total = this.items.reduce((total, item) => total += item.amount * item.price, 0)
   }
 
   removeItem(itemToBeRemoved: SelectedItem) {
@@ -23,7 +27,7 @@ export class PaymentComponent implements OnInit {
         return item.id === itemToBeRemoved.id ? { ...item, amount: item.amount - 1 } : item
       })
     }
-    if (itemRef?.amount === 0) {
+    if (itemRef?.amount === 1) {
       this.items = [...this.items.slice(0, itemIndex), ...this.items.slice(itemIndex + 1)]
     }
     this.itemsChange.emit(this.items)
