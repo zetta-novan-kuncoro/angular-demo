@@ -1,0 +1,23 @@
+p {
+  text-align: center;
+}
+
+main {
+  display: flex;
+  gap: 1rem;
+}
+
+section,
+aside {
+  border: solid 1px #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+section {
+  flex: 1;
+}
+
+aside {
+  width: 25%;
+}
