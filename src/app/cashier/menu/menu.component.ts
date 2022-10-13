@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CashierService } from '../cashier.service';
 
 @Component({
   selector: 'app-menu',
@@ -6,15 +8,16 @@ import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  @Input('items') items: Item[] = []
-  @Output('itemAdded') onAddItem: EventEmitter<Item> = new EventEmitter<Item>();
+  public items: Observable<Item[]>
 
-  constructor() { }
+  constructor(private cashierService: CashierService) {
+    this.items = this.cashierService.items$
+  }
 
   ngOnInit(): void {
   }
 
   addItem(item: Item): void {
-    this.onAddItem.emit(item)
+    this.cashierService.addItem(item);
   }
 }

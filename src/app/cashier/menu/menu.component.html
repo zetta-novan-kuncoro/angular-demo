@@ -1,7 +1,7 @@
 <h2>Menu</h2>
 <ul>
-  <li *ngFor="let item of items" (click)="addItem(item)">
+  <li *ngFor="let item of (items | async)" (click)="addItem(item)">
     <h3>{{ item.name }}</h3>
-    <p>Rp{{ item.price }}</p>
+    <p>{{ item.price | currency:'IDR':'symbol-narrow':'.2-2' }}</p>
   </li>
 </ul>

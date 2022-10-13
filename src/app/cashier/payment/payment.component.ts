@@ -1,36 +1,28 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { CashierService } from '../cashier.service';
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })
-export class PaymentComponent implements OnInit, OnChanges {
-  @Input() items: SelectedItem[] = []
-  @Output() itemsChange: EventEmitter<SelectedItem[]> = new EventEmitter<SelectedItem[]>()
-  public total: number = 0;
+export class PaymentComponent implements OnInit {
+  public items: Observable<SelectedItem[]>
+  public total: Observable<number>
 
-  constructor() { }
+  constructor(private cashierService: CashierService) {
+    this.items = this.cashierService.selectedItems$
+    this.total = this.cashierService.selectedItems$.pipe(
+      map((items) => items.reduce((total, item) => total += item.amount * item.price, 0))
+    )
+  }
 
   ngOnInit(): void {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.total = this.items.reduce((total, item) => total += item.amount * item.price, 0)
+  removeItem(item: SelectedItem) {
+    this.cashierService.removeItem(item)
   }
-
-  removeItem(itemToBeRemoved: SelectedItem) {
-    const itemIndex = this.items.findIndex(({ id }) => id === itemToBeRemoved.id)
-    const itemRef = this.items[itemIndex]
-    if (itemRef?.amount) {
-      this.items = this.items.map((item) => {
-        return item.id === itemToBeRemoved.id ? { ...item, amount: item.amount - 1 } : item
-      })
-    }
-    if (itemRef?.amount === 1) {
-      this.items = [...this.items.slice(0, itemIndex), ...this.items.slice(itemIndex + 1)]
-    }
-    this.itemsChange.emit(this.items)
-  }
-
 }
