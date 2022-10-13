@@ -23,3 +23,18 @@ li {
     justify-content: center;
   }
 }
+
+button {
+  border: solid 1px #e66;
+  border-radius: 4px;
+  padding: 2px 4px;
+  background-color: transparent;
+  color: #e66;
+  cursor: pointer;
+  transition: background-color 50ms ease-out, color 50ms ease-out;
+
+  &:hover {
+    background-color: #e66;
+    color: #fff;
+  }
+}
