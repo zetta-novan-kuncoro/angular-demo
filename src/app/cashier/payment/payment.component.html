@@ -1,1 +1,8 @@
-<p>payment works!</p>
+<h2>Payment</h2>
+<ul>
+  <li *ngFor="let item of items">
+    <span>{{ item.amount }}×{{ item.name }}</span>
+    <span>Rp{{ item.price }}</span>
+    <button (click)="removeItem(item)">Remove</button>
+  </li>
+</ul>

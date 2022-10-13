@@ -1,0 +1,21 @@
+h2 {
+  text-align: center;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  gap: 1rem;
+  list-style: none;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  span:first-child {
+    flex: 1;
+  }
+}
