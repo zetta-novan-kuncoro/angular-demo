@@ -1,1 +1,7 @@
-<p>menu works!</p>
+<h2>Menu</h2>
+<ul>
+  <li *ngFor="let item of items">
+    <h3>{{ item.name }}</h3>
+    <p>Rp{{ item.price }}</p>
+  </li>
+</ul>
