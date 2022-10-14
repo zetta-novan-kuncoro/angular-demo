@@ -1,3 +1,39 @@
+header {
+  padding: 1rem;
+}
+
+nav {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+a {
+  border-radius: 4px;
+  padding: .5rem 1rem;
+  text-decoration: none;
+  color: unset;
+  transition: background-color 150ms ease-out;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #eee;
+  }
+  
+  &.link-active {
+    background-color: #eee;
+  }
+}
+
 h1 {
   text-align: center;
 }

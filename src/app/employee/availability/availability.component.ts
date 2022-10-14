@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-availability',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./availability.component.scss']
 })
 export class AvailabilityComponent implements OnInit {
+  public employees: Observable<Employee[]>
 
-  constructor() { }
+  constructor(private employeeService: EmployeeService) {
+    this.employees = this.employeeService.employees$
+  }
 
   ngOnInit(): void {
   }

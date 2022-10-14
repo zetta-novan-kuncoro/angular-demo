@@ -1,3 +1,18 @@
 <main>
-  <p>availability works!</p>
+  <ul>
+    <li>
+      <span>Name</span>
+      <span>Position</span>
+      <span>Availability</span>
+      <span>Actions</span>
+    </li>
+    <li *ngFor="let employee of (employees | async)">
+      <span>{{ employee.name }}</span>
+      <span>{{ employee.title }}</span>
+      <span>{{ employee.available ? 'Available' : 'Unavailable' }}</span>
+      <span>
+        <a class="button" [routerLink]="['..', 'detail', employee.id]">View Detail</a>
+      </span>
+    </li>
+  </ul>
 </main>

@@ -1,3 +1,4 @@
-<main>
-  <p>detail works!</p>
+<main *ngIf="(employee | async) as employee">
+  <h1>{{ employee.name }}</h1>
+  <p>{{ employee.title }} - {{ employee.available ? 'Available' : 'Unavailable' }}</p>
 </main>
