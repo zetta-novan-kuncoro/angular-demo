@@ -34,7 +34,7 @@
           <input type="number" matInput formControlName="age" />
           <mat-error *ngIf="form.get('age')?.touched || form.get('age')?.dirty">
             {{ form.get('age')?.hasError('required') ? ('This field is required' | translate) : '' }}
-            {{ form.get('age')?.hasError('min') ? ('Minimum age is 10' | translate) : '' }}
+            {{ form.get('age')?.hasError('min') ? ('Minimum age is' | translate:{ number: 10 }) : '' }}
           </mat-error>
         </mat-form-field>
         <mat-radio-group formControlName="gender">
@@ -79,9 +79,9 @@
               <input type="text" matInput formControlName="zip" />
               <mat-error *ngIf="group.get('zip')?.touched || group.get('zip')?.dirty">
                 {{ group.get('zip')?.hasError('required') ? ('This field is required' | translate) : '' }}
-                {{ group.get('zip')?.hasError('pattern') ? ('Only numbers are allowed.' | translate) : '' }}
-                {{ group.get('zip')?.hasError('minlength') ? ('Code should be more than 4 character.' | translate) : '' }}
-                {{ group.get('zip')?.hasError('maxlength') ? ('Code should not be more than 9 character.' | translate) : '' }}
+                {{ group.get('zip')?.hasError('pattern') ? ('Only numbers are allowed' | translate) : '' }}
+                {{ group.get('zip')?.hasError('minlength') ? ('Code should be more than characters' | translate:{ number: 4 }) : '' }}
+                {{ group.get('zip')?.hasError('maxlength') ? ('Code should not be more than characters' | translate:{ number: 9 }) : '' }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
