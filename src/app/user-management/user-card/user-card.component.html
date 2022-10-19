@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <img mat-card-avatar [src]="user?.img" />
+    <img mat-card-avatar [src]="user?.img || '/assets/img/dummy-avatar.png'" />
     <mat-card-title>{{ user?.name }}</mat-card-title>
     <mat-card-subtitle>{{ user?.type }}</mat-card-subtitle>
   </mat-card-header>
