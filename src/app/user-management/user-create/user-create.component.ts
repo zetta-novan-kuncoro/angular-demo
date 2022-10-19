@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserManagementService } from '../user-management.service';
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-user-create',
   templateUrl: './user-create.component.html',
   styleUrls: ['./user-create.component.scss']
 })
-export class UserCreateComponent implements OnInit {
+export class UserCreateComponent implements OnInit, OnDestroy {
+  private destroy$: Subject<boolean> = new Subject<boolean>()
   public form: FormGroup
   public userTypes: User['type'][] = ['ADMIN', 'SUPERADMIN', 'DIRECTOR']
   public userId: string|null
@@ -35,6 +38,16 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.userId) this.patchFormWithUser(this.userId)
+    this.form.get('name')?.valueChanges.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe((value: string) => {
+      this.form.get('name')?.patchValue(value.replace(/[^a-zA-Z ]/g, ""), { emitEvent: false })
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true)
+    this.destroy$.unsubscribe()
   }
 
   patchFormWithUser(id: string) {
