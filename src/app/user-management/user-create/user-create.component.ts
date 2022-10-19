@@ -4,11 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserManagementService } from '../user-management.service';
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
+import { NormalizeStringPipe } from 'src/app/pipes/normalize-string.pipe';
 
 @Component({
   selector: 'app-user-create',
   templateUrl: './user-create.component.html',
-  styleUrls: ['./user-create.component.scss']
+  styleUrls: ['./user-create.component.scss'],
+  providers: [NormalizeStringPipe],
 })
 export class UserCreateComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>()
@@ -41,7 +43,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     this.form.get('name')?.valueChanges.pipe(
       takeUntil(this.destroy$)
     ).subscribe((value: string) => {
-      this.form.get('name')?.patchValue(value.replace(/[^a-zA-Z ]/g, ""), { emitEvent: false })
+      this.form.get('name')?.patchValue(value.replaceAll(/[^a-zA-Zàáâãåäèéêëìíîïòóôõöðøùúûüñýÿœæç ]/g, ""), { emitEvent: false })
     })
   }
 

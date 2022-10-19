@@ -2,6 +2,12 @@
   <h1>{{ 'User List' | translate }}</h1>
   <a mat-raised-button color="primary" [routerLink]="['..', 'user-create']">{{ 'Create User' | translate }}</a>
 </header>
+<section>
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'Search' | translate }}</mat-label>
+    <input type="text" matInput [formControl]="query" />
+  </mat-form-field>
+</section>
 <ul>
   <li *ngFor="let user of (users | async)" >
     <app-user-card [user]="user"></app-user-card>

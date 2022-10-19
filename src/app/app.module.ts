@@ -7,10 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NormalizeStringPipe } from './pipes/normalize-string.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NormalizeStringPipe
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
       }
     }),
   ],
-  providers: [],
+  providers: [NormalizeStringPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

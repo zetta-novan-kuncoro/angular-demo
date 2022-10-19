@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select'
 
 import { ReactiveFormsModule } from '@angular/forms'
 import { TranslateModule } from '@ngx-translate/core';
+import { NormalizeStringPipe } from '../pipes/normalize-string.pipe';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,9 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule.forChild({
       extend: true,
     }),
+  ],
+  providers: [
+    NormalizeStringPipe,
   ]
 })
 export class UserManagementModule { }

@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { of } from 'rxjs'
+import { NormalizeStringPipe } from '../pipes/normalize-string.pipe';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserManagementService {
   private _users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([])
   public users$: Observable<User[]>
 
-  constructor() {
+  constructor(private normalizeString: NormalizeStringPipe) {
     this.users$ = this._users.asObservable()
   }
 
@@ -23,5 +25,14 @@ export class UserManagementService {
     } else {
       this._users.value.push(payload)
     }
+  }
+
+  searchUserByName(name: string): Observable<User[]> {
+    if (!name) return this.users$
+    const filteredUsers = this._users.value.filter(user => {
+      const pipe = this.normalizeString
+      return pipe.transform(user.name).includes(pipe.transform(name))
+    })
+    return of(filteredUsers)
   }
 }
