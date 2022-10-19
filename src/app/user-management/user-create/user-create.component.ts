@@ -20,7 +20,7 @@ export class UserCreateComponent implements OnInit {
     this.form = this.fb.group({
       id: [null, [Validators.required]],
       name: [null, [Validators.required]],
-      age: [null, [Validators.required, Validators.min(19)]],
+      age: [null, [Validators.required, Validators.min(10)]],
       gender: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.email]],
       type: [null, [Validators.required]],
@@ -49,7 +49,7 @@ export class UserCreateComponent implements OnInit {
   createAddressFormGroup(): FormGroup {
     return this.fb.group({
       address: [null, [Validators.required]],
-      zip: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(6)]],
+      zip: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(9), Validators.pattern('[0-9]*')]],
       city: [null, [Validators.required]],
       country: [null, [Validators.required]],
     })
