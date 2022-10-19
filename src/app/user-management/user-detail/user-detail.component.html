@@ -1,0 +1,15 @@
+<section *ngIf="user; else noData">
+  <a [routerLink]="['..']">
+    <h5>← Go Back</h5>
+  </a>
+  <h1>{{ user.name }}</h1>
+  <p>- {{ user.type }} -</p>
+</section>
+<ng-template #noData>
+  <section>
+    <a [routerLink]="['..']">
+      <h5>← {{ 'Go Back' | translate }}</h5>
+    </a>
+    <p>{{ 'No User Data Found' | translate }}</p>
+  </section>
+</ng-template>

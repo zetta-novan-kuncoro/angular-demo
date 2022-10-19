@@ -1,0 +1,12 @@
+<header>
+  <h1>{{ 'User List' | translate }}</h1>
+  <a mat-raised-button color="primary" [routerLink]="['..', 'user-create']">{{ 'Create User' | translate }}</a>
+</header>
+<ul>
+  <li *ngFor="let user of (users | async)" >
+    <app-user-card [user]="user"></app-user-card>
+  </li>
+  <li *ngIf="!(users | async)?.length">
+    {{ 'No user. Try creating one.' | translate }}
+  </li>
+</ul>
