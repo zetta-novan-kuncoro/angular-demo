@@ -5,7 +5,6 @@ import { UserManagementRoutingModule } from './user-management-routing.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { UserCreateComponent } from './user-create/user-create.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
 
 import { MatCardModule } from '@angular/material/card'
 import { MatButtonModule } from '@angular/material/button'
@@ -21,7 +20,6 @@ import { TranslateModule } from '@ngx-translate/core';
     UserListComponent,
     UserCardComponent,
     UserCreateComponent,
-    UserDetailComponent,
   ],
   imports: [
     CommonModule,

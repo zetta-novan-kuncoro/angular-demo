@@ -40,10 +40,8 @@ export class UserCreateComponent implements OnInit {
   patchFormWithUser(id: string) {
     const user = this.userManagementService.getUserById(id)
     if (!user) return
-    if (user.addresses.length > 1) {
-      for (const address of user.addresses) {
-        this.addresses.push(this.createAddressFormGroup())
-      }
+    for (let i = 1; 1 < user.addresses.length; i++) {
+      this.addresses.push(this.createAddressFormGroup())
     }
     this.form.patchValue(user)
   }
@@ -57,9 +55,17 @@ export class UserCreateComponent implements OnInit {
     })
   }
 
+  addAddress(): void {
+    this.addresses.push(this.createAddressFormGroup(), { emitEvent: true })
+  }
+
   submit(): void {
-    const payload = this.form.value;
-    this.userManagementService.addUser(payload)
-    this.router.navigate(['..'])
+    if (!this.form.valid) {
+      this.form.markAllAsTouched()
+    } else {
+      const payload = this.form.value;
+      this.userManagementService.addUser(payload)
+      this.router.navigate(['..'])
+    }
   }
 }

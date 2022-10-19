@@ -60,8 +60,10 @@
               <mat-label>{{ 'Country' | translate }}</mat-label>
               <input type="text" matInput formControlName="country" />
             </mat-form-field>
+            <button mat-button color="warn" (click)="addresses.removeAt(idx)" *ngIf="addresses.length > 1">Remove Address</button>
           </li>
         </ul>
+        <button mat-button (click)="addAddress()" *ngIf="addresses.length < 2">Add Another Address</button>
       </form>
     </mat-card-content>
   </mat-card>
