@@ -1,1 +1,15 @@
-<p>post works!</p>
+<main>
+  <article *ngIf="(post$ | async) as post; else loading">
+    <header>
+      <a [routerLink]="['..', '..', 'posts']">← Back</a>
+      <h1>{{ post.title | titlecase }}</h1>
+      <a [routerLink]="['edit']" class="text-muted">Edit this post</a>
+    </header>
+    <p>{{ post.body }}</p>
+  </article>
+  <ng-template #loading>
+    <div class="loading-container">
+      <p>Loading...</p>
+    </div>
+  </ng-template>
+</main>

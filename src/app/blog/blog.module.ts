@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms'
 
 import { BlogRoutingModule } from './blog-routing.module';
 import { BlogComponent } from './blog/blog.component';
@@ -17,7 +18,8 @@ import { PostFormComponent } from './post-form/post-form.component';
   ],
   imports: [
     CommonModule,
-    BlogRoutingModule
+    BlogRoutingModule,
+    ReactiveFormsModule,
   ]
 })
 export class BlogModule { }

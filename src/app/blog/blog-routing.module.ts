@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BlogComponent } from './blog/blog.component';
 import { PostFormComponent } from './post-form/post-form.component';
 import { PostComponent } from './post/post.component';
-import { PostsComponent } from './posts/posts.component';
 
 const routes: Routes = [
   {
     path: 'posts',
     pathMatch: 'full',
-    component: PostsComponent,
+    component: BlogComponent,
   },
   {
     path: 'post/:id',
@@ -21,7 +21,7 @@ const routes: Routes = [
     component: PostFormComponent,
   },
   {
-    path: 'post/new',
+    path: 'posts/new',
     pathMatch: 'full',
     component: PostFormComponent,
   },

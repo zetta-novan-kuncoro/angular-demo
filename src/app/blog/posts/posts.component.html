@@ -1,1 +1,9 @@
-<p>posts works!</p>
+<ul>
+  <li [routerLink]="['..', 'posts', 'new']">
+    + Add new Post
+  </li>
+  <li [routerLink]="['..', 'post', post.id]" *ngFor="let post of (posts$ | async)">
+    <h2>{{ post.title | titlecase }}</h2>
+    <p>{{ post.body }}</p>
+  </li>
+</ul>
